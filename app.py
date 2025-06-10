@@ -7,8 +7,14 @@ app = Flask(__name__)
 def scrape_laws():
     url = "http://www.parlament.gov.rs/akti/doneti-zakoni/doneti-zakoni.1033.html"
     response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    html = response.text
+    
+    # Dodaj ovo da vidiš ceo HTML u logu (oprezno, biće dugačko)
+    print("======= HTML content START =======")
+    print(html[:1000])  # Samo prvih 1000 karaktera
+    print("======= HTML content END =======")
 
+    soup = BeautifulSoup(html, 'html.parser')
     laws = []
 
     for link in soup.select("div#content a[href*='.doc'], a[href*='.pdf']"):
