@@ -1,3 +1,4 @@
+import sys
 from flask import Flask, jsonify
 import requests
 from bs4 import BeautifulSoup
@@ -14,9 +15,9 @@ def scrape_laws():
     response = requests.get(url, headers=headers)
     html = response.text
 
-    print("======= HTML content START =======")
-    print(html[:1000])
-    print("======= HTML content END =======")
+    print("======= HTML content START =======", file=sys.stderr, flush=True)
+    print(html[:1000], file=sys.stderr, flush=True)
+    print("======= HTML content END =======", file=sys.stderr, flush=True)
 
     soup = BeautifulSoup(html, 'html.parser')
     laws = []
