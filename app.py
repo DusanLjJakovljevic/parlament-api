@@ -6,12 +6,16 @@ app = Flask(__name__)
 
 def scrape_laws():
     url = "http://www.parlament.gov.rs/akti/doneti-zakoni/doneti-zakoni.1033.html"
-    response = requests.get(url)
-    html = response.text
     
-    # Dodaj ovo da vidiš ceo HTML u logu (oprezno, biće dugačko)
+    headers = {
+        'User-Agent': 'Mozilla/5.0'
+    }
+
+    response = requests.get(url, headers=headers)
+    html = response.text
+
     print("======= HTML content START =======")
-    print(html[:1000])  # Samo prvih 1000 karaktera
+    print(html[:1000])
     print("======= HTML content END =======")
 
     soup = BeautifulSoup(html, 'html.parser')
